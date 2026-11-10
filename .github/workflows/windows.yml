@@ -17,6 +17,12 @@ jobs:
           dotnet-version: |
             8.0.x
             10.0.x
+      - name: Animation manifest and frame tests
+        timeout-minutes: 3
+        shell: pwsh
+        run: |
+          dotnet run --project NekoChat.Animation.Tests -c Release -- NekoChat.Animation/Assets/manifest.json
+          if ($LASTEXITCODE -ne 0) { throw 'Animation tests failed' }
       - name: Restore, build and offline tests
         id: build
         timeout-minutes: 5

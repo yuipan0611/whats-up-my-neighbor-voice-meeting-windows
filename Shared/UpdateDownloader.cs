@@ -12,11 +12,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-#if NETFRAMEWORK
 namespace Neighbor.Core
-#else
-namespace NekoChat.Core
-#endif
 {
     public sealed class UpdateDownloadProgress
     {
@@ -28,7 +24,7 @@ namespace NekoChat.Core
     /// <summary>Consent-driven download of a verified installer. Never starts a process.</summary>
     public sealed class UpdateDownloader : IDisposable
     {
-        private const string ReleasePrefix = "/yuipan0611/whats-up-my-neighbor-ai-input-windows/releases/download/";
+        private const string ReleasePrefix = "/yuipan0611/whats-up-my-neighbor-voice-meeting-windows/releases/download/";
         public const long DefaultMaximumBytes = 512L * 1024 * 1024;
         private readonly HttpClient client;
         private readonly long maximumBytes;

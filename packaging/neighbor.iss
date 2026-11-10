@@ -12,9 +12,9 @@ AppName=What's up my neighbor
 AppVersion={#AppVersion}
 ; Original author credit is kept in AppPublisher and LICENSE; the URLs point to the upstream Windows repository.
 AppPublisher=YUI
-AppPublisherURL=https://github.com/yuipan0611/whats-up-my-neighbor-ai-input-windows
-AppSupportURL=https://github.com/yuipan0611/whats-up-my-neighbor-ai-input-windows/issues
-AppUpdatesURL=https://github.com/yuipan0611/whats-up-my-neighbor-ai-input-windows/releases
+AppPublisherURL=https://github.com/yuipan0611/whats-up-my-neighbor-voice-meeting-windows
+AppSupportURL=https://github.com/yuipan0611/whats-up-my-neighbor-voice-meeting-windows/issues
+AppUpdatesURL=https://github.com/yuipan0611/whats-up-my-neighbor-voice-meeting-windows/releases
 DefaultDirName={localappdata}\Programs\WhatsUpMyNeighbor
 DefaultGroupName=What's up my neighbor
 DisableProgramGroupPage=yes

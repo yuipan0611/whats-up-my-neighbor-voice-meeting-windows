@@ -7,23 +7,14 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-#if NETFRAMEWORK
 using Neighbor.Core;
 namespace Neighbor.Windows.UI
-#else
-using NekoChat.Core;
-namespace NekoChat.Windows
-#endif
 {
     /// <summary>Isolated native-UI smoke fixture; never contacts a server or executes a file.</summary>
     internal static class UpdateDownloadUiFixture
     {
         internal static readonly byte[] Payload = Encoding.ASCII.GetBytes("MZsynthetic-update-fixture-not-executable");
-#if NETFRAMEWORK
-        internal const string Url = "https://github.com/yuipan0611/whats-up-my-neighbor-ai-input-windows/releases/download/v0.1.0-beta.9/Neighbor-Setup-0.1.0-beta.9-x64.exe";
-#else
-        internal const string Url = "https://github.com/yuipan0611/whats-up-my-neighbor-ai-input-windows/releases/download/nekochat-lite-v0.1.0-beta.9/NekoChat-Setup-win-x64.exe";
-#endif
+        internal const string Url = "https://github.com/yuipan0611/whats-up-my-neighbor-voice-meeting-windows/releases/download/v0.1.0-beta.9/Neighbor-Setup-0.1.0-beta.9-x64.exe";
         internal static UpdateCheckResult Release => UpdateCheckResult.UpdateAvailable("0.1.0-beta.8", "0.1.0-beta.9", "Synthetic", null, null, Url, Url + ".sha256");
         internal static UpdateDownloader Downloader(string mode) => new UpdateDownloader(new FixtureHandler(mode));
         private sealed class FixtureHandler : HttpMessageHandler

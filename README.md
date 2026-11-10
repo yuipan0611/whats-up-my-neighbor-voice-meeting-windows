@@ -1,4 +1,8 @@
-# What's up my neighbor AI Input — Windows
+# What's up my neighbor — Voice & Meeting (Windows)
+
+本專案從 [whats-up-my-neighbor-ai-input-windows](https://github.com/yuipan0611/whats-up-my-neighbor-ai-input-windows) 的 `5a32eb7` 拆出，保留 Windows 語音工具的修改歷史。**Neko Chat Lite 仍在原 repo**。貓咪動畫獨立複製至根目錄 `NekoChat.Animation/`，不依賴聊天室。
+
+本次只搬移既有語音工具；會議記錄先在 Mac 版驗證，這個 Windows repo 尚未實作會議功能，也尚未發布新的安裝檔。歷史版本與驗證紀錄不代表新 repo 已發行。見 [拆分紀錄](MIGRATION.md)。
 
 官方網站：[nekonode.cloud](https://nekonode.cloud)。各平台進度、使用教學與開發者文件可在官網查看。
 
@@ -6,32 +10,11 @@
 
 目前版本：**0.1.0-beta.3（預發布測試版）**。實機驗收尚未完成，見 [VALIDATION.md](VALIDATION.md)。
 
-本 repo 是 Windows 版的正式 repo，由 yuipan0611 維護與發布，授權為 MIT（見 [LICENSE](LICENSE)）。Windows 版主要貢獻者：[andrewchu0101](https://github.com/andrewchu0101)。macOS 版在 [Mac repo](https://github.com/yuipan0611/whats-up-my-neighbor-ai-input-macos)。Windows 版與 macOS 版各自開發、各自發布；功能不完全對等，以本文件列出的內容為準。
-
-## NekoChat Lite：教室聊天與綠色版（教室輕量版）
-
-新版本為 **0.1.0-beta.10 預發布測試版**：[下載與更新說明](https://github.com/yuipan0611/whats-up-my-neighbor-ai-input-windows/releases/tag/nekochat-lite-v0.1.0-beta.10)。加入真實附件、老師／同學聊天室及課堂檔案分享；教室雙機、網路及其他 DPI 驗收仍未完成。
-
-教室環境專屬的輕量化實作位於 [windows-lite/](windows-lite/README.md)：透明桌面貓咪、9 種花色隨選、訊息氣泡，以及「免邀請碼、純內網 IP 直連通信」。
-
-- **雙版本體系**：
-  - **標準版 (`Neighbor.Windows`)**：全域快捷鍵 AI 語音輸入（Groq Whisper）、自訂詞庫、智慧學習、桌面小黑貓。
-  - **教室 Lite 版 (`NekoChat.WindowsLite`)**：純內網 IP 直接通訊、9 種花色貓咪調色盤、免邀請碼、免語音輸入、免外網、開機自啟動、本機 IP 通訊錄名稱管理。
-- **免安裝隨開即用**：提供單一綠色執行檔 `NekoChat-Lite.exe` 與一鍵安裝包 `NekoChat-Setup-win-x64.exe`，不需安裝 Python、.NET 執行環境或設定 API Key。
-- **通訊方式**：直接在輸入框填入對方的內網 IP（例如 `192.168.1.25`）並發送，對方桌面的貓咪即時冒出對話氣泡；支援在介面記住「同學姓名／座位」儲存於本機 `settings.json`。
-
-| 要做什麼 | 下載／說明 |
-|---|---|
-| 下載免安裝綠色執行檔（下載點開即用） | [下載 NekoChat-Lite.exe](https://github.com/yuipan0611/whats-up-my-neighbor-ai-input-windows/releases) |
-| 下載一鍵安裝檔 | [下載 NekoChat-Setup-win-x64.exe](https://github.com/yuipan0611/whats-up-my-neighbor-ai-input-windows/releases) |
-| 詳細功能與教室使用指南 | [Lite 教室版完整說明](windows-lite/README.md) |
-
-
-Lite 功能與驗證界線見 [Lite 說明](windows-lite/README.md) 與 [交付紀錄](windows-lite/DELIVERY.md)。一般啟動不啟用歷史 signed 配對流程；正文上限 65,536 UTF-8 bytes。標準版語音工具的版本與流程仍獨立。
+本 repo 是獨立 Windows 語音工具的後續開發 repo，由 yuipan0611 維護，授權為 MIT（見 [LICENSE](LICENSE)）。Windows 版主要貢獻者：[andrewchu0101](https://github.com/andrewchu0101)。macOS 版在 [Mac repo](https://github.com/yuipan0611/whats-up-my-neighbor-ai-input-macos)。Windows 版與 macOS 版各自開發、各自發布；功能不完全對等，以本文件列出的內容為準。
 
 ## 桌面小黑貓（Windows 第一階段）
 
-預設關閉，與 macOS 版第一次使用的狀態一致。開啟後，小黑貓會在螢幕工作區底部散步與休息。右下角系統匣選單的「桌面小黑貓散步」可開關，設定會保存。貓咪視窗不搶焦點；只有貓咪身體接收滑鼠，可按住拖曳，放開後在新高度水平散步，透明區域仍會穿透到後面的視窗；錄音與辨識期間、鎖定、休眠及全螢幕時隱藏，恢復後繼續。Windows 實際桌面行為仍待人工驗收。
+桌面散步預設關閉，與 macOS 版第一次使用的狀態一致。系統匣可選九種既有花色。開啟後，小黑貓會在螢幕工作區底部散步與休息。右下角系統匣選單的「桌面小黑貓散步」可開關，設定會保存。貓咪視窗不搶焦點；只有貓咪身體接收滑鼠，可按住拖曳，放開後在新高度水平散步，透明區域仍會穿透到後面的視窗；錄音與辨識期間、鎖定、休眠及全螢幕時隱藏，恢復後繼續。Windows 實際桌面行為仍待人工驗收。
 
 素材及腳步參考原作者 macOS 版，保持 X 左眼與勾勾右眼。這是第一階段功能同步，已支援拖曳（放開後只水平散步），尚未包含舔掌、抓起動畫、資料夾停靠與其他 macOS 桌面互動。錄音浮窗的眼睛操作維持原樣。
 
@@ -39,12 +22,12 @@ Lite 功能與驗證界線見 [Lite 說明](windows-lite/README.md) 與 [交付�
 
 - 版本號只在 [VERSION](VERSION) 檔案維護。
 - 發布流程見 [docs/UPDATES.md](docs/UPDATES.md)。流程會建置、測試、打包、做安裝測試，全部通過後才建立預發布版本。
-- 本版不做程式內自動更新。要升級時，下載新版安裝檔直接執行即可，設定、詞典與 API Key 會保留。
+- 系統匣可檢查更新；下載與執行安裝各需使用者同意。新 repo 尚無 release 時，不會提供新安裝檔。設定、詞典與 API Key 的識別維持原樣。
 - 版本紀錄見 [CHANGELOG.md](CHANGELOG.md)，發布說明見 [RELEASE_NOTES.md](RELEASE_NOTES.md)。
 
 ## 下載與安裝
 
-到 [Releases](https://github.com/yuipan0611/whats-up-my-neighbor-ai-input-windows/releases) 下載最新版本，只需要一個檔案：
+到 [Releases](https://github.com/yuipan0611/whats-up-my-neighbor-voice-meeting-windows/releases) 下載最新版本，只需要一個檔案：
 
 ```text
 Neighbor-Setup-<版本>-x64.exe
@@ -148,6 +131,3 @@ App 不會替你購買 API 額度；額度或費用依你的 Groq 帳號方案�
 ## 不在本版範圍
 
 iPhone 接力、跨裝置詞典同步、多人會議分人、本機 AI 模型，以及 macOS 版的其他功能。
-
-
-2026-11-05：班級聊天介面本機候選（未發布），老師置頂／貼圖收件對象修正、IP-only 班級包與本機綽號，見 [實作與驗證](docs/classroom-ux/IMPLEMENTATION.md)。

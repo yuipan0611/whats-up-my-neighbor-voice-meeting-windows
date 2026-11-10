@@ -12,3 +12,18 @@ build/
 
 # Private classroom sidecar: never commit real roster data
 classroom-roster.csv
+
+# Local recordings, meeting output and credentials are not public source files.
+*.wav
+*.m4a
+*.mp3
+*.flac
+*.ogg
+*.aac
+*.aiff
+*.caf
+.env
+.env.*
+Neighbor Meetings/
+transcript.md
+summary.md

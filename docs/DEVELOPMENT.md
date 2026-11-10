@@ -33,8 +33,8 @@ winget install --id JRSoftware.InnoSetup -e
 ## 取得原始碼
 
 ```powershell
-git clone https://github.com/yuipan0611/whats-up-my-neighbor-ai-input-windows.git
-cd whats-up-my-neighbor-ai-input-windows
+git clone https://github.com/yuipan0611/whats-up-my-neighbor-voice-meeting-windows.git
+cd whats-up-my-neighbor-voice-meeting-windows
 ```
 
 ## 建置與離線測試

@@ -202,7 +202,7 @@ namespace Neighbor.Core
 
     public sealed class UpdateChecker : IDisposable
     {
-        public const string DefaultReleasesUrl = "https://api.github.com/repos/yuipan0611/whats-up-my-neighbor-ai-input-windows/releases";
+        public const string DefaultReleasesUrl = "https://api.github.com/repos/yuipan0611/whats-up-my-neighbor-voice-meeting-windows/releases";
         private readonly HttpClient client;
         private readonly string releasesUrl;
 

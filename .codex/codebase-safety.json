@@ -1,0 +1,165 @@
+{
+  "$schema": "safely-modify-codebase/v1",
+  "status": "ready",
+  "project": {
+    "name": "Neighbor Voice and Meeting Windows",
+    "purpose": "Standalone Windows dictation with a local copy of cat animation; meeting features follow Mac validation.",
+    "repo_root": ".",
+    "last_reviewed": "2026-11-11"
+  },
+  "instructions": {
+    "files": [],
+    "precedence_notes": []
+  },
+  "stack": {
+    "languages": [
+      "C#",
+      "PowerShell"
+    ],
+    "frameworks": [
+      ".NET Framework 4.8",
+      "WinForms",
+      "WASAPI",
+      "UI Automation",
+      ".NET 10 animation tests"
+    ],
+    "package_managers": [
+      "NuGet"
+    ]
+  },
+  "commands": {
+    "install": [
+      "dotnet restore Neighbor.Tests/Neighbor.Tests.csproj --locked-mode"
+    ],
+    "test": [
+      "./scripts/build.ps1",
+      "dotnet run --project NekoChat.Animation.Tests -c Release -- NekoChat.Animation/Assets/manifest.json"
+    ],
+    "lint": [],
+    "typecheck": [],
+    "build": [
+      "./scripts/build.ps1"
+    ],
+    "notes": "Windows native build/test commands are owned by windows.yml; this macOS shell has no dotnet on PATH. No local Windows result is claimed."
+  },
+  "architecture": {
+    "entry_points": [
+      "Neighbor.Windows/Program.cs"
+    ],
+    "feature_roots": [
+      "Neighbor.Core/",
+      "Neighbor.Windows/",
+      "NekoChat.Animation/"
+    ],
+    "shared_modules": [
+      "Shared/UpdateDownloader.cs",
+      "Shared/UpdateDownloadChecks.cs",
+      "Shared/UpdateDownloadUiFixture.cs"
+    ],
+    "state_and_data": [
+      "Neighbor.Core/DictationCoordinator.cs",
+      "Neighbor.Core/SettingsStore.cs",
+      "Neighbor.Core/VocabularyStore.cs"
+    ],
+    "external_integrations": [
+      "Neighbor.Core/GroqTranscriber.cs",
+      "Neighbor.Windows/Platform/WindowsCredentialStore.cs",
+      "Neighbor.Windows/Platform/WindowsTextDelivery.cs"
+    ]
+  },
+  "conventions": {
+    "patterns": [
+      "Core uses interfaces for audio, transcription, text delivery and credentials; Windows supplies platform adapters.",
+      "Native entry point and core tests run from scripts/build.ps1."
+    ],
+    "naming": [],
+    "error_handling": [],
+    "logging": [],
+    "tests": [
+      "Neighbor.Tests is the net48 offline/platform/UI test executable.",
+      "NekoChat.Animation.Tests validates bundled frames against Assets/manifest.json."
+    ],
+    "notes": ""
+  },
+  "protected_areas": [
+    {
+      "path_or_symbol": "Neighbor.Core/DictationCoordinator.cs",
+      "reason": "Pure repository split; preserve existing dictation and install identities.",
+      "invariants": [
+        "Byte-identical to source main 5a32eb7 for this split."
+      ]
+    },
+    {
+      "path_or_symbol": "Neighbor.Core/GroqTranscriber.cs",
+      "reason": "Pure repository split; preserve existing dictation and install identities.",
+      "invariants": [
+        "Byte-identical to source main 5a32eb7 for this split."
+      ]
+    },
+    {
+      "path_or_symbol": "Neighbor.Windows/Platform/WasapiRecorder.cs",
+      "reason": "Pure repository split; preserve existing dictation and install identities.",
+      "invariants": [
+        "Byte-identical to source main 5a32eb7 for this split."
+      ]
+    },
+    {
+      "path_or_symbol": "Neighbor.Windows/Platform/WindowsCredentialStore.cs",
+      "reason": "Pure repository split; preserve existing dictation and install identities.",
+      "invariants": [
+        "Byte-identical to source main 5a32eb7 for this split."
+      ]
+    },
+    {
+      "path_or_symbol": "VERSION",
+      "reason": "Pure repository split; preserve existing dictation and install identities.",
+      "invariants": [
+        "Byte-identical to source main 5a32eb7 for this split."
+      ]
+    },
+    {
+      "path_or_symbol": "packaging/neighbor.iss",
+      "reason": "Existing install/upgrade identity must remain stable.",
+      "invariants": [
+        "Preserve AppId, executable, installation directory and uninstall identity; only repository URLs change."
+      ]
+    }
+  ],
+  "change_policy": {
+    "prefer_local_changes": true,
+    "require_consumer_search_for_shared_changes": true,
+    "forbid_unrelated_refactors": true,
+    "require_baseline_before_edit": true,
+    "preferred_max_files_per_step": 5
+  },
+  "verification": {
+    "minimum_after_change": [
+      "Windows CI build, offline and native UI tests, packaging and installation tests",
+      "Animation manifest and frame tests",
+      "Byte comparison of protected files and source test inventory",
+      "Full rewritten-history gitleaks scan and large/audio/private-data inventory",
+      "git diff --check"
+    ],
+    "manual_checks": [
+      "Real Windows microphone, Groq and foreground paste require a physical Windows session."
+    ],
+    "notes": ""
+  },
+  "known_unknowns": [
+    "Actual Windows devices and third-party application acceptance remain documented in VALIDATION.md."
+  ],
+  "evidence": [
+    {
+      "fact": "Groq whisper-large-v3 dictation endpoint is owned by the transcription adapter.",
+      "source": "Neighbor.Core/GroqTranscriber.cs"
+    },
+    {
+      "fact": "Install identity and executable come from Inno Setup configuration.",
+      "source": "packaging/neighbor.iss"
+    },
+    {
+      "fact": "Windows CI owns build, offline/UI, package and install tests.",
+      "source": ".github/workflows/windows.yml"
+    }
+  ]
+}

@@ -34,7 +34,7 @@ namespace Neighbor.Tests
                     ""tag_name"": ""nekochat-lite-v0.2.0"",
                     ""name"": ""NekoChat Lite 0.2.0"",
                     ""draft"": false,
-                    ""html_url"": ""https://github.com/yuipan0611/whats-up-my-neighbor-ai-input-windows/releases/tag/nekochat-lite-v0.2.0"",
+                    ""html_url"": ""https://github.com/yuipan0611/whats-up-my-neighbor-voice-meeting-windows/releases/tag/nekochat-lite-v0.2.0"",
                     ""assets"": [{ ""name"": ""NekoChat-Setup-win-x64.exe"", ""browser_download_url"": ""https://example.com/neko.exe"" }]
                 },
                 {
@@ -42,7 +42,7 @@ namespace Neighbor.Tests
                     ""name"": ""What's up my neighbor 0.1.0-beta.4"",
                     ""draft"": false,
                     ""body"": ""新版改善發布"",
-                    ""html_url"": ""https://github.com/yuipan0611/whats-up-my-neighbor-ai-input-windows/releases/tag/v0.1.0-beta.4"",
+                    ""html_url"": ""https://github.com/yuipan0611/whats-up-my-neighbor-voice-meeting-windows/releases/tag/v0.1.0-beta.4"",
                     ""assets"": [{ ""name"": ""Neighbor-Setup-0.1.0-beta.4-x64.exe"", ""browser_download_url"": ""https://example.com/neighbor.exe"" }]
                 },
                 {

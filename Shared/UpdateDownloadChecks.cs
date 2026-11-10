@@ -11,17 +11,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
-#if NETFRAMEWORK
 using Neighbor.Core;
 namespace Neighbor.Tests
-#else
-using NekoChat.Core;
-namespace NekoChat.Tests
-#endif
 {
     internal static class UpdateDownloadChecks
     {
-        private const string Url = "https://github.com/yuipan0611/whats-up-my-neighbor-ai-input-windows/releases/download/nekochat-lite-v0.1.0-beta.9/NekoChat-Setup-win-x64.exe";
+        private const string Url = "https://github.com/yuipan0611/whats-up-my-neighbor-voice-meeting-windows/releases/download/nekochat-lite-v0.1.0-beta.9/NekoChat-Setup-win-x64.exe";
         private sealed class Handler : HttpMessageHandler
         {
             internal Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> Reply;
@@ -114,13 +109,7 @@ namespace NekoChat.Tests
                 check(failed, "unsafe, corrupt or cancelled download rejected");
             };
             string releaseJson = "[{\"tag_name\":\"nekochat-lite-v0.1.0-beta.9\",\"draft\":false,\"assets\":[{\"name\":\"NekoChat-Lite.exe\",\"browser_download_url\":\"https://example.com/portable.exe\"},{\"name\":\"NekoChat-Setup-win-x64.exe.sha256\",\"browser_download_url\":\"" + Url + ".sha256\"},{\"name\":\"NekoChat-Setup-win-x64.exe\",\"browser_download_url\":\"" + Url + "\"}]}]";
-#if NETFRAMEWORK
             var selected = UpdateChecker.ParseReleasesJson(releaseJson, SemVersion.Parse("0.1.0-beta.8"), "nekochat-lite-v");
-#else
-            UpdateCheckResult selected;
-            using (var json = new MemoryStream(Encoding.UTF8.GetBytes(releaseJson)))
-                selected = UpdateChecker.ParseReleases(json, SemVersion.Parse("0.1.0-beta.8"), "nekochat-lite-v");
-#endif
             check(selected.Success && selected.DownloadUrl == Url, "setup is selected even when portable EXE is first");
             check(selected.ChecksumUrl == Url + ".sha256", "matching checksum asset is selected independently of asset order");
             var bytes = Encoding.ASCII.GetBytes("MZ" + new string('a', 512));
@@ -251,19 +240,6 @@ namespace NekoChat.Tests
                         check(Directory.GetFiles(directory, "*.part").Length == 0 && Directory.GetFiles(directory, "*.exe").Length == 0, mode + ": stalled download leaves no partial or executable");
                     }
                 }
-#if !NETFRAMEWORK
-                string link = folder("linked"), external = folder("outside"); Directory.CreateDirectory(external);
-                bool linkCreated = false;
-                try { Directory.CreateSymbolicLink(link, external); linkCreated = true; }
-                catch (UnauthorizedAccessException) when (OperatingSystem.IsWindows()) { }
-                if (linkCreated)
-                {
-                    using (var downloader = new UpdateDownloader(Server(bytes)))
-                        await reject(async () => { await downloader.DownloadAsync(Url, Url + ".sha256", link).ConfigureAwait(false); }).ConfigureAwait(false);
-                    check(Directory.GetFileSystemEntries(external).Length == 0, "linked cache never writes outside app data");
-                    Directory.Delete(link);
-                }
-#endif
             }
             finally { Directory.Delete(root, true); }
             Console.WriteLine("Direct update download: " + checks + " verification, progress, cancellation and boundary checks passed.");
